@@ -1,21 +1,10 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import DisplayFilter from './DisplayFilter';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input,  Select} from 'antd';
 
-function FilterInput() {
+function FilterInput(props) {
+  const {handlerSearch, dropdown, selectedValue, onChangeDropDown} = props;
   const [text, setText] = useState('');
-  const [filterPerson, setPersons] = useState([]);
-
-  const handlerGet = () => {
-    axios.get(`https://retoolapi.dev/geeOvB/data?Name=${text}`).then((res) => {
-      if (res.status === 200) {
-        setPersons(res.data);
-      } else {
-        return Promise.reject({ twtw: 123 });
-      }
-    });
-  };
   return (
     <div>
       <Form
@@ -29,9 +18,14 @@ function FilterInput() {
         initialValues={{
           remember: true,
         }}
+        onFinish={handlerSearch} 
         autoComplete="off"
       >
-        <Form.Item label="Filter name from employee"></Form.Item>
+        <Form.Item label="Filter name from employee"  name="category">
+          <Select onChange={onChangeDropDown} >
+            {dropdown.map((item, index) => <Select.Option  name={item} value={item} key={index}>{item}</Select.Option>)}
+          </Select>
+        </Form.Item>
         <Form.Item
           label="Employee name / surname"
           name="name"
@@ -44,17 +38,18 @@ function FilterInput() {
         >
           <Input
             type="text"
-            onChange={(e) => setText(e.target.value)}
+           onChange={(e) => setText(e.target.value)}
             name="InputFilter"
           />
         </Form.Item>
+
         <Form.Item label="Button">
-          <Button type="primary" onClick={handlerGet}>
+          <Button type="primary"   htmlType="submit">
             Add Fiter
           </Button>
         </Form.Item>
       </Form>
-      <DisplayFilter persons={filterPerson} />
+      {/* <DisplayFilter persons={filterPerson} /> */}
     </div>
   );
 }

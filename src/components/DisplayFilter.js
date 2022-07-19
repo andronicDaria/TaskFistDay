@@ -1,7 +1,6 @@
 import React from 'react';
-import 'antd/dist/antd.css';
 import { Table, Space, Button } from 'antd';
-import { PropTypes, propTypes } from 'prop-types';
+import { PropTypes } from 'prop-types';
 
 function DisplayFilter(props) {
   const { persons, handlerClick } = props;
@@ -61,8 +60,8 @@ function DisplayFilter(props) {
     },
   ];
 
-  if (persons.length === 0)
-    return <Table dataSource={persons} columns={columns} rowKey="id" />;
+  // if (persons.length === 0)
+  //   return <Table dataSource={persons} columns={columns} rowKey="id" />;
   return <Table dataSource={persons} columns={columns} rowKey="id" />;
 }
 

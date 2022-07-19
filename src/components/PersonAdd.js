@@ -1,14 +1,20 @@
 import React from 'react';
-import axios from 'axios';
+import Api from '../api/axios'
 import { nanoid } from 'nanoid';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, message } from 'antd';
+import { postDataAdd } from '../api/axios';
+
 
 class PersonAdd extends React.Component {
   handlerSubmit = (values) => {
+    
     values.id = nanoid();
     const data = values;
-    axios.post(`https://retoolapi.dev/geeOvB/data`, { data }).then((res) => {
-      console.log('Data show in post - ', res.data.data);
+
+    postDataAdd(data).then((res) => {
+        console.log('Data show in post - ', res.data.data);
+        const employee =  res.data.data
+        message.success(`Succesefuly add new employee! Name: ${employee.name}, Email: ${employee.email},  Job ${employee.job}, City ${employee.city}. `)
     });
   };
 
