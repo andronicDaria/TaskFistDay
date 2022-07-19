@@ -60,8 +60,6 @@ function DisplayFilter(props) {
     },
   ];
 
-  // if (persons.length === 0)
-  //   return <Table dataSource={persons} columns={columns} rowKey="id" />;
   return <Table dataSource={persons} columns={columns} rowKey="id" />;
 }
 

@@ -1,8 +1,8 @@
 import './App.css';
-import DisplayComponent from './components/DisplayComponent';
+import MethodsRequests from './api/MethodsRequests';
 
 function App() {
-  return <DisplayComponent />;
+  return <MethodsRequests />;
 }
 
 export default App;

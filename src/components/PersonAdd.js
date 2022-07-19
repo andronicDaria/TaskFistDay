@@ -1,21 +1,26 @@
 import React from 'react';
-import Api from '../api/axios'
 import { nanoid } from 'nanoid';
 import { Button, Form, Input, message } from 'antd';
 import { postDataAdd } from '../api/axios';
 
-
 class PersonAdd extends React.Component {
   handlerSubmit = (values) => {
-    
     values.id = nanoid();
     const data = values;
 
-    postDataAdd(data).then((res) => {
+    postDataAdd(data)
+      .then((res) => {
         console.log('Data show in post - ', res.data.data);
-        const employee =  res.data.data
-        message.success(`Succesefuly add new employee! Name: ${employee.name}, Email: ${employee.email},  Job ${employee.job}, City ${employee.city}. `)
-    });
+        this.props.handlerGetData();
+        const employee = res.data.data;
+        message.success(
+          `Succesefuly add new employee! Name: ${employee.name}, Email: ${employee.email},  Job ${employee.job}, City ${employee.city}. `
+        );
+      })
+      .catch((error) => {
+        console.error(error);
+        message.error(`Failed add new employee! `);
+      });
   };
 
   render() {
