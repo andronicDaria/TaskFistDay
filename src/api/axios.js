@@ -3,14 +3,20 @@ import axios from 'axios';
 const request = axios.create({
   baseURL: `https://retoolapi.dev/geeOvB/data`,
 });
-const getData = request.get();
 
-const getDataFilter = (categorys, text) => {
-  return request.get(`?${categorys}=${text}`);
+const getData = async () => {
+  const results = await request.get();
+  return results.data;
 };
 
-const postDataAdd = (data) => {
-  return request.post(`https://retoolapi.dev/geeOvB/data`, { data });
+const getDataFilter = async (categorys, text) => {
+  const results = await request.get(`?${categorys}=${text}`);
+  return results.data;
+};
+
+const postDataAdd = async (data) => {
+  const results = await request.post(null, { data });
+  return results.data;
 };
 
 export { getData, getDataFilter, postDataAdd };

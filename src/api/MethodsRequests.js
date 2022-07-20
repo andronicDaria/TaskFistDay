@@ -17,8 +17,8 @@ export default class MethodsRequests extends React.Component {
   }
 
   onGetdata = () => {
-    getData.then((res) => {
-      const persons = res.data;
+    getData().then((res) => {
+      const persons = res;
       const dropdownItems = Object.keys(persons[0]);
       this.setState({ persons: persons, dropdownItems: dropdownItems });
     });
@@ -33,8 +33,7 @@ export default class MethodsRequests extends React.Component {
     const { category, name } = props;
 
     getDataFilter(category, name).then((res) => {
-      const data = res.data;
-      this.setState({ persons: data });
+      this.setState({ persons: res });
     });
   };
 

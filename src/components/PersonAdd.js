@@ -10,9 +10,9 @@ class PersonAdd extends React.Component {
 
     postDataAdd(data)
       .then((res) => {
-        console.log('Data show in post - ', res.data.data);
+        console.log('Data show in post - ', res.data);
         this.props.handlerGetData();
-        const employee = res.data.data;
+        const employee = res.data;
         message.success(
           `Succesefuly add new employee! Name: ${employee.name}, Email: ${employee.email},  Job ${employee.job}, City ${employee.city}. `
         );
